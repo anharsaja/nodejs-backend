@@ -14,13 +14,12 @@ Node.js
 ├── ✅ Controller
 ├── ✅ Service
 ├── ✅ Database
-
+├── ✅ CRUD + database
+├── ✅ Validation
+├── ✅ Error handling
 │
 ├── 👈 Now
 │
-├── ⬜ CRUD + database
-├── ⬜ Validation
-├── ⬜ Error handling
 ├── ⬜ Authentication JWT
 ├── ⬜ Authorization / Role
 ├── ⬜ Testing
