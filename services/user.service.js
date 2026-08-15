@@ -8,6 +8,7 @@ const getUser = async () => {
 
 const getUsersById = async (id) => {
     const result = await pool.query("SELECT * FROM users WHERE id = $1", [id]);
+    // console.log("result.rows[0]:", result.rows[0]);
     return result.rows[0];
 }
 
@@ -29,9 +30,19 @@ const updateUser = async (id, name, email) => {
     return user;
 }
 
+const deleteUser = async (id) => {
+    const result = await pool.query(
+        "DELETE FROM users WHERE id = $1 RETURNING *",
+        [id]
+    );
+    const user = result.rows[0];
+    return user;
+};
+
 export {
     getUser,
     createUser,
     getUsersById,
-    updateUser
+    updateUser,
+    deleteUser
 };

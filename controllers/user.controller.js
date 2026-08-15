@@ -52,4 +52,19 @@ const updateUser = async (req, res) => {
     });
 };
 
-export { getUser, createUser, getUserById, updateUser };
+const deleteUser = async (req, res) => {
+    const { id } = req.params;
+    const user = await userService.getUsersById(id);
+    if (!user) {
+        return res.status(404).json({
+            message: "User not found",
+        });
+    }
+    await userService.deleteUser(id);
+    res.json({
+        message: "User deleted",
+        data: user
+    });
+};
+
+export { getUser, createUser, getUserById, updateUser, deleteUser };
