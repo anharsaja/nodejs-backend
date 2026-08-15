@@ -11,9 +11,9 @@ Node.js
 ├── ✅ next()
 ├── ✅ Express Router
 ├── ✅ Middleware auth sederhana
+├── ✅ Controller
 │
 ├── 👈 Now
-│   └── Controller
 │
 ├── ⬜ Service
 ├── ⬜ Database
