@@ -1,39 +1,11 @@
 import express, { Router } from "express";
-const router = express.Router();
 import auth from "../middlewares/auth.js";
+import { getUsers, createUsers } from "../controllers/user.controller.js";
 
 
-router.get("/", (req, res) => {
-    res.json({
-        data: [
-            {
-                id: 1,
-                name: "John Doe",
-                email: "john.doe@example.com"
-            },
-            {
-                id: 2,
-                name: "Jane Smith",
-                email: "jane.smith@example.com"
-            }
-        ]
-    });
-});
+const router = express.Router();
 
-router.post("/", auth, (req, res) => {
-    const { name, email } = req.body;
-    if (!name || !email) {
-        return res.status(400).json({
-            message: "Name and email are required",
-        });
-    }
-    return res.status(201).json({
-        message: "User created",
-        data: {
-            name,
-            email,
-        },
-    });
-});
+router.get("/", getUsers);
+router.post("/", auth, createUsers);
 
 export default router;
