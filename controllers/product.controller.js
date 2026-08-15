@@ -1,17 +1,9 @@
+import * as productService from "../services/product.service.js";
+
 const getProducts = (req, res) => {
+    const products = productService.getProducts();
     res.json({
-        data: [
-            {
-                id: 1,
-                name: "Laptop",
-                price: 1000,
-            },
-            {
-                id: 2,
-                name: "Smartphone",
-                price: 500,
-            },
-        ]
+        data: products
     });
 };
 
@@ -23,13 +15,12 @@ const createProducts = (req, res) => {
             message: "Name and price are required",
         });
     }
-    console.log(req.body);
+
+    const product = productService.createProducts(name, price);
+    
     return res.status(201).json({
         message: "Product created",
-        data: {
-            name,
-            price,
-        },
+        data: product
     });
 };
 
