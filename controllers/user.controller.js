@@ -1,13 +1,26 @@
 import * as userService from "../services/user.service.js";
 
-const getUser = (req, res) => {
-    const users = userService.getUser();
+const getUser =  async (req, res) => {
+    const users = await userService.getUser();
     res.json({
         data: users
     });
 };
 
-const createUser = (req, res) => {
+const getUserById = async (req, res) => {
+    const { id } = req.params;
+    const user = await userService.getUsersById(id);
+    if (!user) {
+        return res.status(404).json({
+            message: "User not found",
+        });
+    }
+    res.json({
+        data: user
+    });
+};
+
+const createUser = async (req, res) => {
     const { name, email } = req.body;
     if (!name || !email) {
         return res.status(400).json({
@@ -16,7 +29,7 @@ const createUser = (req, res) => {
     }
 
     // create user in the service
-    const user = userService.createUser(name, email);
+    const user = await userService.createUser(name, email);
 
     return res.status(201).json({
         message: "User created",
@@ -24,4 +37,4 @@ const createUser = (req, res) => {
     });
 };
 
-export { getUser, createUser };
+export { getUser, createUser, getUserById };

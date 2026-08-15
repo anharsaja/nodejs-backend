@@ -1,20 +1,27 @@
-const products = [{ id: 1, name: "Laptop", price: 1000 }, { id: 2, name: "Smartphone", price: 500 }, { id: 3, name: "Tablet", price: 300 }];
+import pool from "../databases/db.js";
 
-const getProducts = () => {
-    return products;
+
+const getProducts = async () => {
+    const result = await pool.query("SELECT * FROM products ORDER BY id");
+    return result.rows;
+};
+
+const getProductById = async (id) => {
+    const result = await pool.query("SELECT * FROM products WHERE id = $1", [id]);
+    return result.rows[0];
 }
 
-const createProducts = (name, price) => {
-    const product = {
-        id: products.length + 1,
-        name,
-        price,
-    };
-    products.push(product);
+const createProducts = async (name, price) => {
+    const result = await pool.query(
+        "INSERT INTO products (name, price) VALUES ($1, $2) RETURNING *",
+        [name, price]
+    );
+    const product = result.rows[0];
     return product;
 }
 
 export {
     getProducts,
     createProducts,
+    getProductById
 };

@@ -1,13 +1,26 @@
 import * as productService from "../services/product.service.js";
 
-const getProducts = (req, res) => {
-    const products = productService.getProducts();
+const getProducts = async (req, res) => {
+    const products = await productService.getProducts();
     res.json({
         data: products
     });
 };
 
-const createProducts = (req, res) => {
+const getProductById = async (req, res) => {
+    const { id } = req.params;
+    const product = await productService.getProductById(id);
+    if (!product) {
+        return res.status(404).json({
+            message: "Product not found",
+        });
+    }
+    res.json({
+        data: product
+    });
+};
+
+const createProducts = async (req, res) => {
     const { name, price } = req.body;
 
     if (!name || !price) {
@@ -16,7 +29,7 @@ const createProducts = (req, res) => {
         });
     }
 
-    const product = productService.createProducts(name, price);
+    const product = await productService.createProducts(name, price);
     
     return res.status(201).json({
         message: "Product created",
@@ -24,4 +37,4 @@ const createProducts = (req, res) => {
     });
 };
 
-export { getProducts, createProducts };
+export { getProducts, createProducts, getProductById };

@@ -1,38 +1,27 @@
-const users = [
-    {
-        id: 1,
-        name: "John Doe",
-        email: "john.doe@example.com"
-    },
-    {
-        id: 2,
-        name: "Jane Smith",
-        email: "jane.smith@example.com"
-    },
-    {
-        id: 3,
-        name: "Bob Johnson",
-        email: "bob.johnson@example.com"
-    }
-];
+import pool from "../databases/db.js";
 
-const getUser = () => {
-    return users;
+
+const getUser = async () => {
+    const result = await pool.query("SELECT * FROM users ORDER BY id");
+    return result.rows;
 };
 
-const createUser = (name, email) => {
-    const user = {
-        id: users.length + 1,
-        name,
-        email,
-    };
+const getUsersById = async (id) => {
+    const result = await pool.query("SELECT * FROM users WHERE id = $1", [id]);
+    return result.rows[0];
+}
 
-    users.push(user);
-
+const createUser = async (name, email) => {
+    const result = await pool.query(
+        "INSERT INTO users (name, email) VALUES ($1, $2) RETURNING *",
+        [name, email]
+    );
+    const user = result.rows[0];
     return user;
 };
 
 export {
     getUser,
     createUser,
+    getUsersById
 };
