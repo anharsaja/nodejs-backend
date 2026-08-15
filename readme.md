@@ -12,10 +12,10 @@ Node.js
 ├── ✅ Express Router
 ├── ✅ Middleware auth sederhana
 ├── ✅ Controller
+├── ✅ Service
 │
 ├── 👈 Now
 │
-├── ⬜ Service
 ├── ⬜ Database
 ├── ⬜ CRUD + database
 ├── ⬜ Validation
