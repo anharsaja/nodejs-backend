@@ -25,3 +25,15 @@ Node.js
 ├── ⬜ Testing
 └── ⬜ Deployment
 ```
+```
+belajar-nodejs/
+├── app.js
+├── routes/
+│   ├── user.routes.js
+│   └── product.routes.js
+├── controllers/
+│   ├── user.controller.js
+│   └── product.controller.js
+└── middlewares/
+      └── auth.js
+```
