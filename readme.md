@@ -13,10 +13,11 @@ Node.js
 ├── ✅ Middleware auth sederhana
 ├── ✅ Controller
 ├── ✅ Service
+├── ✅ Database
+
 │
 ├── 👈 Now
 │
-├── ⬜ Database
 ├── ⬜ CRUD + database
 ├── ⬜ Validation
 ├── ⬜ Error handling
