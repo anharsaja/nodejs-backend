@@ -37,4 +37,23 @@ const createProducts = async (req, res) => {
     });
 };
 
-export { getProducts, createProducts, getProductById };
+const updateProduct = async (req, res) => {
+    const { id } = req.params;
+    const { name, price } = req.body;
+
+    if (!name || !price) {
+        return res.status(400).json({
+            message: "Name and price are required",
+        });
+    }
+
+    const product = await productService.updateProduct(id, name, price);
+
+    return res.json({
+        message: "Product updated",
+        data: product
+    });
+};
+
+
+export { getProducts, createProducts, getProductById, updateProduct };

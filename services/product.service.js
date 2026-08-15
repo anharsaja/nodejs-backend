@@ -20,8 +20,18 @@ const createProducts = async (name, price) => {
     return product;
 }
 
+const updateProduct = async (id, name, price) => {
+    const result = await pool.query(
+        "UPDATE products SET name = $1, price = $2 WHERE id = $3 RETURNING *",
+        [name, price, id]
+    );
+    const product = result.rows[0];
+    return product;
+}
+
 export {
     getProducts,
     createProducts,
-    getProductById
+    getProductById,
+    updateProduct
 };

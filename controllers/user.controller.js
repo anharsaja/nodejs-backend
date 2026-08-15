@@ -1,6 +1,6 @@
 import * as userService from "../services/user.service.js";
 
-const getUser =  async (req, res) => {
+const getUser = async (req, res) => {
     const users = await userService.getUser();
     res.json({
         data: users
@@ -37,4 +37,19 @@ const createUser = async (req, res) => {
     });
 };
 
-export { getUser, createUser, getUserById };
+const updateUser = async (req, res) => {
+    const { id } = req.params;
+    const { name, email } = req.body;
+    if (!name || !email) {
+        return res.status(400).json({
+            message: "Name and email are required",
+        });
+    }
+    const user = await userService.updateUser(id, name, email);
+    res.json({
+        message: "User updated",
+        data: user
+    });
+};
+
+export { getUser, createUser, getUserById, updateUser };
