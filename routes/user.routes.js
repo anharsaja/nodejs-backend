@@ -6,7 +6,7 @@ import { getUser, createUser, getUserById, updateUser, deleteUser } from "../con
 const router = express.Router();
 
 router.get("/", getUser);
-router.get("/:id", getUserById);
+router.get("/:id", auth, getUserById);
 router.post("/", auth, createUser);
 router.put("/:id", auth, updateUser);
 router.delete("/:id", auth, deleteUser);

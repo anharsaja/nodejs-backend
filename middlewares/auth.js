@@ -1,20 +1,24 @@
-//auth
+import jwt from "jsonwebtoken";
+
 const auth = (req, res, next) => {
-    const apiKey = req.headers["x-api-key"];
+    try {
+        const authHeader = req.headers.authorization;
 
-    if (!apiKey) {
+        if (!authHeader) {
+            return res.status(401).json({
+                message: "Authorization header is required",
+            });
+        }
+        const token = authHeader.split(" ")[1];
+        const decoded = jwt.verify(token, "secret-key");
+        req.user = decoded;
+        next();
+        
+    } catch (error) {
         return res.status(401).json({
-            message: "API key is required",
+            message: "Invalid or expired token",
         });
     }
-
-    if (apiKey !== "rahasia") {
-        return res.status(401).json({
-            message: "Invalid API key",
-        });
-    }
-
-    next();
 };
 
 export default auth;

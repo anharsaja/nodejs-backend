@@ -20,6 +20,10 @@ const getProductById = async (req, res, next) => {
                 message: "Product not found",
             });
         }
+
+        // for view iat and exp token
+        // console.log("USER:", req.user);
+
         res.json({
             data: product
         });
