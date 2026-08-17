@@ -21,10 +21,11 @@ Node.js
 ├── ✅ CRUD + database
 ├── ✅ Validation
 ├── ✅ Error handling
+├── ✅ Authentication JWT
+├── ✅ req.user
 │
 ├── 👈 Now
 │
-├── ⬜ Authentication JWT
 ├── ⬜ Authorization / Role
 ├── ⬜ Testing
 └── ⬜ Deployment
