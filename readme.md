@@ -1,4 +1,8 @@
 ```
+psql -U [user]
+```
+
+```
 Node.js
 │
 ├── ✅ JavaScript dasar
@@ -36,4 +40,14 @@ belajar-nodejs/
 │   └── product.controller.js
 └── middlewares/
       └── auth.js
+```
+
+```
+Route
+  ↓
+Controller  ← HTTP
+  ↓
+Service     ← Business logic
+  ↓
+Database
 ```

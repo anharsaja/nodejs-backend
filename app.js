@@ -3,7 +3,7 @@ import userRoutes from "./routes/user.routes.js";
 import productRoutes from "./routes/product.routes.js";
 import pool from "./databases/db.js";
 import error from "./middlewares/error.middleware.js";
-// import auth from "./middlewares/auth.js";
+import authRoutes from "./routes/auth.routes.js";
 
 
 //logger (mencatat setiap request yang masuk ke server)
@@ -14,8 +14,8 @@ const logger = (req, res, next) => {
 //express
 const app = express();
 app.use(express.json());
-// app.use(auth); // global auth
 app.use(logger); // global logger anjay
+app.use("/api/auth", authRoutes); // auth routes
 
 
 

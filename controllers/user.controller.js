@@ -30,15 +30,20 @@ const getUserById = async (req, res, next) => {
 
 const createUser = async (req, res, next) => {
     try {
-        const { name, email } = req.body;
-        if (!name || !email) {
+        const { name, email, password } = req.body;
+
+        if (!name || !email || !password) {
             return res.status(400).json({
-                message: "Name and email are required",
+                message: "Name, email, and password are required",
             });
         }
-        const user = await userService.createUser(name, email);
+        const user = await userService.createUser(
+            name, 
+            email, 
+            password
+        );
         return res.status(201).json({
-            message: "User created",
+            message: "User created successfully",
             data: user
         });
     } catch (error) {
