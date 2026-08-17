@@ -10,9 +10,9 @@ const login = async (req, res, next) => {
             });
         }
 
-        const user = await authService.login(email, password);
+        const result = await authService.login(email, password);
 
-        if (!user) {
+        if (!result) {
             return res.status(401).json({
                 message: "Invalid email or password",
             });
@@ -21,11 +21,11 @@ const login = async (req, res, next) => {
         res.status(200).json({
             message: "Login successful",
             data: {
-                id: user.user.id,
-                name: user.user.name,
-                email: user.user.email
+                id: result.user.id,
+                name: result.user.name,
+                email: result.user.email
             },
-            token: user.token
+            token: result.token
         });
     } catch (error) {
         next(error);
